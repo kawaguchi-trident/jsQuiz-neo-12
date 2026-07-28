@@ -13,13 +13,12 @@ VS Codeのターミナルで進めましょう。
 
 ## 課題内容
 
-`RecommendSwitcher` コンポーネントの `return null;` を、`useState` で動く JSX に書き換えてください。
+`RecommendSwitcher` の `return` 内にある `null` を、タブボタン2つの JSX に書き換えてください。
 
-- 初期表示：`おすすめ: 焼きたてクロワッサン 🥐`
+- 初期表示は food（食べ物）側のおすすめが出る
 - `.tab-food-btn` を押すと food（食べ物）表示になる
 - `.tab-drink-btn` を押すと drink（飲み物）表示になる
-- `.recommend-title` に `おすすめ: {data[activeTab].name}` を表示
-- `.recommend-desc` に `{data[activeTab].desc}` を表示
+- タイトル・説明の表示 `<p>` は用意済みなので、ボタン部分だけを書けばOK
 
 用意済みの `const [activeTab, setActiveTab] = useState('food');` は消さないでください。
 

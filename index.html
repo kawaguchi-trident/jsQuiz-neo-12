@@ -73,15 +73,13 @@
     // ===== ここから下があなたの課題です =====
 
     /* やること：RecommendSwitcher コンポーネントを完成させること。
-      useState で activeTab を管理し、
-      1) .tab-food-btn をクリックしたら activeTab を 'food' にする
-      2) .tab-drink-btn をクリックしたら activeTab を 'drink' にする
-      3) .recommend-title に「おすすめ: {data[activeTab].name}」を表示
-      4) .recommend-desc に「{data[activeTab].desc}」を表示
-      する JSX を return する。
+      この課題では、下の null を「タブボタン2つの JSX」に書き換える。
+      1) .tab-food-btn をクリックしたら setActiveTab('food')
+      2) .tab-drink-btn をクリックしたら setActiveTab('drink')
+      になるように記述する。
 
       ■ ヒント
-      - 先に activeTab で data から表示内容を選ぶ
+      - 表示テキスト（タイトルと説明）は下に用意済み
       - JSX では class ではなく className を使う
       - 文字列や値を表示文に入れるときは中かっこで埋め込む */
 
@@ -98,8 +96,14 @@
       };
       const [activeTab, setActiveTab] = useState('food');
 
-      // ↓ ここのnullを書き換える（課題）
-      return null;
+      // ↓ ここのnullを「タブボタン2つの JSX」に書き換える（課題）
+      return (
+        <section className="recommend-card">
+          {null}
+          <p className="recommend-title">おすすめ: {data[activeTab].name}</p>
+          <p className="recommend-desc">{data[activeTab].desc}</p>
+        </section>
+      );
     }
 
     // ===== ここまでがあなたの課題です =====
