@@ -1,7 +1,7 @@
 # jsQuiz-neo-12
 
 React CDN（esm.sh + Babel）で進める、`useState` 入門問題です。
-`students/{番号}/index.html` で、いいねカウンターを完成させます。
+`students/{番号}/index.html` で、おすすめカード切り替えUIを完成させます。
 
 ## JavaScriptクイズNEO ⑫
 
@@ -13,13 +13,15 @@ VS Codeのターミナルで進めましょう。
 
 ## 課題内容
 
-`LikeCounter` コンポーネントの `return null;` を、`useState` で動く JSX に書き換えてください。
+`RecommendSwitcher` コンポーネントの `return null;` を、`useState` で動く JSX に書き換えてください。
 
-- 初期表示：`いいね数: 0`
-- `.like-btn` を押すたびに、いいね数が 1 ずつ増える
-- `.like-label` に `いいね数: {likes}` を表示
+- 初期表示：`おすすめ: 焼きたてクロワッサン 🥐`
+- `.tab-food-btn` を押すと food（食べ物）表示になる
+- `.tab-drink-btn` を押すと drink（飲み物）表示になる
+- `.recommend-title` に `おすすめ: {data[activeTab].name}` を表示
+- `.recommend-desc` に `{data[activeTab].desc}` を表示
 
-用意済みの `const [likes, setLikes] = useState(0);` は消さないでください。
+用意済みの `const [activeTab, setActiveTab] = useState('food');` は消さないでください。
 
 ## 接続方式（HTTPS / SSH）を確認する
 

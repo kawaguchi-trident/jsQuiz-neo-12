@@ -20,31 +20,57 @@ function normalize(text) {
 // CDN（Babel / esm.sh）の読み込みと React の描画を待つ
 async function gotoAndWaitRender(page) {
   await page.goto(resolveFileUrl());
-  await page.waitForSelector('.like-btn', { timeout: 30000 });
-  await page.waitForSelector('.like-label', { timeout: 30000 });
+  await page.waitForSelector('.tab-food-btn', { timeout: 30000 });
+  await page.waitForSelector('.tab-drink-btn', { timeout: 30000 });
+  await page.waitForSelector('.recommend-title', { timeout: 30000 });
+  await page.waitForSelector('.recommend-desc', { timeout: 30000 });
 }
 
-test('初期表示でボタンといいね表示が描画される', async ({ page }) => {
+test('初期表示で2つのタブボタンとおすすめ表示が描画される', async ({
+  page,
+}) => {
   await gotoAndWaitRender(page);
-  await expect(page.locator('.like-btn')).toHaveCount(1);
-  await expect(page.locator('.like-label')).toHaveCount(1);
-  expect(normalize(await page.locator('.like-label').textContent())).toBe(
-    'いいね数: 0',
+  await expect(page.locator('.tab-food-btn')).toHaveCount(1);
+  await expect(page.locator('.tab-drink-btn')).toHaveCount(1);
+  await expect(page.locator('.recommend-title')).toHaveCount(1);
+  await expect(page.locator('.recommend-desc')).toHaveCount(1);
+  expect(normalize(await page.locator('.recommend-title').textContent())).toBe(
+    'おすすめ: 焼きたてクロワッサン 🥐',
+  );
+  expect(normalize(await page.locator('.recommend-desc').textContent())).toBe(
+    'サクサク食感で朝にぴったり。',
   );
 });
 
-test('ボタンを3回押すと 0 -> 1 -> 2 -> 3 と増える', async ({ page }) => {
+test('タブボタンで食べ物と飲み物を切り替え表示できる', async ({ page }) => {
   await gotoAndWaitRender(page);
-  const likes = page.locator('.like-label');
-  const button = page.locator('.like-btn');
+  const title = page.locator('.recommend-title');
+  const desc = page.locator('.recommend-desc');
+  const foodBtn = page.locator('.tab-food-btn');
+  const drinkBtn = page.locator('.tab-drink-btn');
 
-  expect(normalize(await likes.textContent())).toBe('いいね数: 0');
-  await button.click();
-  expect(normalize(await likes.textContent())).toBe('いいね数: 1');
-  await button.click();
-  expect(normalize(await likes.textContent())).toBe('いいね数: 2');
-  await button.click();
-  expect(normalize(await likes.textContent())).toBe('いいね数: 3');
+  expect(normalize(await title.textContent())).toBe(
+    'おすすめ: 焼きたてクロワッサン 🥐',
+  );
+  expect(normalize(await desc.textContent())).toBe(
+    'サクサク食感で朝にぴったり。',
+  );
+
+  await drinkBtn.click();
+  expect(normalize(await title.textContent())).toBe(
+    'おすすめ: ハニーカフェラテ ☕',
+  );
+  expect(normalize(await desc.textContent())).toBe(
+    'はちみつの甘さでほっと一息。',
+  );
+
+  await foodBtn.click();
+  expect(normalize(await title.textContent())).toBe(
+    'おすすめ: 焼きたてクロワッサン 🥐',
+  );
+  expect(normalize(await desc.textContent())).toBe(
+    'サクサク食感で朝にぴったり。',
+  );
 });
 
 test('useState を使って実装している', async ({ page }) => {

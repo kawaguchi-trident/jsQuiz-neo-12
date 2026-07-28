@@ -49,7 +49,7 @@ jobs:
               body = [
                 '## ✅ 合格！',
                 '',
-                `**${file}** の React コンポーネント（useState のいいねカウンター）が正しく動きました。`,
+                `**${file}** の React コンポーネント（useState のおすすめカード切替）が正しく動きました。`,
                 'お疲れ様でした！',
               ].join('\n');
             } else if (result === 'no_file') {
@@ -63,14 +63,15 @@ jobs:
               body = [
                 '## ❌ 不合格',
                 '',
-                `**${file}** のいいねカウンターが期待通りに動きませんでした。`,
+                `**${file}** のおすすめカード切替が期待通りに動きませんでした。`,
                 '',
                 '**確認ポイント**',
-                '- `LikeCounter` の `return null` を JSX に書き換えましたか？',
-                '- `const [likes, setLikes] = useState(0);` の行を消していませんか？',
-                '- `.like-btn` の `onClick` で、クリックごとにいいね数が増える処理を呼んでいますか？',
-                '- `.like-label` に `いいね数: {likes}` と表示していますか？',
-                '- ボタンを押すと `0 -> 1 -> 2 -> 3` と増えますか？',
+                '- `RecommendSwitcher` の `return null` を JSX に書き換えましたか？',
+                '- `const [activeTab, setActiveTab] = useState(''food'');` の行を消していませんか？',
+                '- `.tab-food-btn` の `onClick` で `setActiveTab(''food'')` を呼んでいますか？',
+                '- `.tab-drink-btn` の `onClick` で `setActiveTab(''drink'')` を呼んでいますか？',
+                '- `.recommend-title` に `おすすめ: {data[activeTab].name}` と表示していますか？',
+                '- `.recommend-desc` に `{data[activeTab].desc}` と表示していますか？',
                 '- `class` ではなく `className` と書いていますか？',
                 '',
                 'コードを修正して再度 push してください。',
