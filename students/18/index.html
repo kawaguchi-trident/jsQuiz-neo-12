@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jsQuiz12 - React入門（useState）</title>
+  <style>
+    body {
+      padding: 0 16px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      letter-spacing: 0.08em;
+    }
+
+    .recommend-card {
+      max-width: 360px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f8fcff;
+      padding: 14px 16px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      border: 1px solid #999;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 1rem;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .recommend-title {
+      margin: 12px 0 0;
+      font-size: 1.05rem;
+      font-weight: bold;
+    }
+
+    .recommend-desc {
+      margin: 8px 0 0;
+      color: #444;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>TRIDENT CAFE おすすめカード</h1>
+  <p>食べ物 / 飲み物ボタンで、おすすめ表示を切り替えます。</p>
+
+  <div id="root"></div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19",
+        "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime",
+        "react-dom/client": "https://esm.sh/react-dom@19/client"
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" data-type="module" data-presets="react">
+    // ===== 用意済み：React 本体の読み込み（書き換えないこと）=====
+    import React, { useState } from 'react';
+    import { createRoot } from 'react-dom/client';
+
+    // ===== ここから下があなたの課題です =====
+
+    /* やること：RecommendSwitcher コンポーネントを完成させること。
+      この課題では、下の null を「タブボタン2つの JSX」に書き換える。
+      1) .tab-food-btn をクリックしたら setActiveTab('food')
+      2) .tab-drink-btn をクリックしたら setActiveTab('drink')
+      になるように記述する。
+
+      ■ ヒント
+      - 表示テキスト（タイトルと説明）は下に用意済み
+      - JSX では class ではなく className を使う
+      - 文字列や値を表示文に入れるときは中かっこで埋め込む */
+
+    function RecommendSwitcher() {
+      const data = {
+        food: {
+          name: '焼きたてクロワッサン 🥐',
+          desc: 'サクサク食感で朝にぴったり。'
+        },
+        drink: {
+          name: 'ハニーカフェラテ ☕',
+          desc: 'はちみつの甘さでほっと一息。'
+        }
+      };
+      const [activeTab, setActiveTab] = useState('food');
+
+      // ↓ ここのnullを「タブボタン2つの JSX」に書き換える（課題）
+      return (
+        <section className="recommend-card">
+          <div className="tab-buttons">
+            <button className="tab-btn tab-food-btn" onClick={() => setActiveTab("food")}>食べ物</button>
+            <button className="tab-btn tab-drink-btn" onClick={() => setActiveTab("drink")}>飲み物</button>
+          </div>
+
+          <p className="recommend-title">おすすめ: {data[activeTab].name}</p>
+          <p className="recommend-desc">{data[activeTab].desc}</p>
+        </section>
+      );
+    }
+
+    // ===== ここまでがあなたの課題です =====
+
+    // ===== ここから下は用意済みです（書き換えないこと）=====
+    function App() {
+      return <RecommendSwitcher />;
+    }
+
+    createRoot(document.querySelector('#root')).render(<App />);
+
+    // ----- 自動判定用（書き換えないこと）-----
+    window.__quizReadRecommendText = () =>
+      document.querySelector('.recommend-title')?.textContent || '';
+  </script>
+</body>
+
+</html>
